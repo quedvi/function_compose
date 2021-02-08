@@ -1,5 +1,3 @@
-from tools.trans_float import t
+from tools.trans_dict import t
 
-for i in range(6):
-    print(i)
-    print(t(i))
+print(t({}))
