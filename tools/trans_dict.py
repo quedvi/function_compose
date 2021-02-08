@@ -1,7 +1,7 @@
 from .function import Function
 
 # define a range of reusable simple functions
-def add_field(key, value_function):
+def add_key(key, value_function):
     @Function
     def f(x):
         x[key] = value_function(x)
@@ -42,11 +42,11 @@ def normalize(a, b):
 
 # Transformation of composed elementary functions
 t = (
-    add_field('a', lambda z : 2) 
-    * add_field('b', lambda z : z['a']) 
+    add_key('a', lambda z : 2) 
+    * add_key('b', lambda z : z['a']) 
     * map_value('b', lambda z : z * 4)
-    * add_field('c', lambda z : normalize(z['a'], z['b']))
-    * add_field('d', lambda z : normalize(z['b'], z['a']))
+    * add_key('c', lambda z : normalize(z['a'], z['b']))
+    * add_key('d', lambda z : normalize(z['b'], z['a']))
     * delete_keys(['d', 'e'])
     * rename_keys({'c': 'e'})
 )
