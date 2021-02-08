@@ -20,18 +20,14 @@ def rename_keys(trans_dict):
     def f(x):
         for key in trans_dict:
             if key in x:
-                x[trans_dict[key]] = x[key]
-                del x[key]
+                x[trans_dict[key]] = x.pop(key)
         return x
     return f
 
 def delete_keys(key_array):
     @Function
     def f(x):
-        for key in key_array:
-            if key in x:
-                del x[key]
-        return x
+        return dict([(key, val) for key, val in x.items() if key not in key_array])
     return f
 
 
