@@ -1,34 +1,26 @@
 from .function import Function
 
 # define a range of reusable simple functions
-def add_key(key, value_function):
-    @Function
-    def f(x):
-        x[key] = value_function(x)
-        return x
-    return f
+@Function
+def add_key(x, key, value_function):
+    x[key] = value_function(x)
+    return x
+    
+@Function
+def map_value(x, key, value_function):
+    x[key] = value_function(x[key])
+    return x
 
-def map_value(key, value_function):
-    @Function
-    def f(x):
-        x[key] = value_function(x[key])
-        return x
-    return f
-
-def rename_keys(trans_dict):
-    @Function
-    def f(x):
-        for key in trans_dict:
-            if key in x:
-                x[trans_dict[key]] = x.pop(key)
-        return x
-    return f
-
-def delete_keys(key_array):
-    @Function
-    def f(x):
-        return dict([(key, val) for key, val in x.items() if key not in key_array])
-    return f
+@Function
+def rename_keys(x, trans_dict):
+    for key in trans_dict:
+        if key in x:
+            x[trans_dict[key]] = x.pop(key)
+    return x
+ 
+@Function
+def delete_keys(x, key_array):
+    return dict([(key, val) for key, val in x.items() if key not in key_array])
 
 
 

@@ -1,29 +1,21 @@
 from .function import Function
 
 # define a range of reusable simple functions
-def multiply(y):
-    @Function
-    def f(x):
-        return x * 1.0
-    return f
+@Function
+def multiply(x, y):
+    return x * 1.0
+    
+@Function
+def add(x, y):
+    return x + y
 
-def add(y):
-    @Function
-    def f(x):
-        return x + y
-    return f
+@Function
+def sub(x, y):
+    return x - y
 
-def sub(y):
-    @Function
-    def f(x):
-        return x - y
-    return f
-
-def scale(k, d):
-    @Function
-    def f(x):
-        return x * k + d
-    return f
+@Function
+def scale(x, k, d):
+    return x * k + d
 
 
 # define a Transformation of composed simple functions
